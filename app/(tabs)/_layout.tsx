@@ -2,32 +2,63 @@ import { Tabs } from 'expo-router';
 import React from 'react';
 
 import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+
+import Ionicons from '@expo/vector-icons/Ionicons';
+import Octicons from '@expo/vector-icons/Octicons';
+import Entypo from '@expo/vector-icons/Entypo';
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
         tabBarButton: HapticTab,
-      }}>
+        tabBarActiveTintColor: '#135bec',
+        tabBarInactiveTintColor: '#9CA3AF',
+      }}
+    >
       <Tabs.Screen
-        name="index"
+        name='index'
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <Octicons
+              name={focused ? 'home-fill' : 'home'}
+              size={focused ? 25 : 24}
+              color={color}
+            />
+          ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name='categories'
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: 'Categories',
+          tabBarIcon: ({ color, focused }) => (
+            <Octicons name='stack' size={focused ? 26 : 24} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name='conversion'
+        options={{
+          title: 'Conversion',
+          tabBarIcon: ({ color, focused }) => (
+            <Entypo name='swap' size={focused ? 26 : 24} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name='chat'
+        options={{
+          title: 'Chat',
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons
+              name={focused ? 'chatbubbles' : 'chatbubbles-outline'}
+              size={focused ? 26 : 24}
+              color={color}
+            />
+          ),
         }}
       />
     </Tabs>

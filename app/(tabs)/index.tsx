@@ -1,98 +1,202 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+import Feather from '@expo/vector-icons/Feather';
+import React, { useState } from 'react';
+import { useRouter } from 'expo-router';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { HeaderWithMenu } from '@/components/header-with-menu';
 
 export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
+  const router = useRouter();
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      router.push(
+        `/screens/search?q=${encodeURIComponent(searchQuery.trim())}` as any
+      );
+    }
+  };
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <HeaderWithMenu />
+
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        <Text style={styles.title}>Your essential medical calculator</Text>
+        <View
+          style={[
+            styles.searchContainer,
+            isFocused && styles.searchContainerFocused,
+          ]}
+        >
+          <Feather
+            name='search'
+            size={20}
+            color='#616f89'
+            style={styles.searchIcon}
+          />
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search calculations, e.g., 'BMI', 'GFR'..."
+            placeholderTextColor='#616f89'
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            onSubmitEditing={handleSearch}
+            returnKeyType='search'
+            numberOfLines={1}
+            multiline={false}
+          />
+        </View>
+
+        <View style={styles.card}>
+          <View style={styles.cardImageContainer}>
+            <Image
+              source={require('../../assets/images/Nurse.png')}
+              style={styles.cardImage}
+              resizeMode='contain'
+            />
+          </View>
+          <View style={styles.cardContent}>
+            <Text style={styles.cardNumber}>100+</Text>
+            <Text style={styles.cardDescription}>
+              Validated formulas and converters at your fingertips.
+            </Text>
+          </View>
+        </View>
+
+        <View style={{ flex: 1 }} />
+
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.button}
+            activeOpacity={0.8}
+            onPress={() => router.push('/categories' as any)}
+          >
+            <Text style={styles.buttonText}>Browse All Categories</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  container: {
+    flex: 1,
+    backgroundColor: '#f6f6f8',
+  },
+  scrollContent: {
+    flexGrow: 1,
+    paddingHorizontal: 20,
+    paddingTop: 10,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'regular',
+    textTransform: 'uppercase',
+    marginBottom: 8,
+    textAlign: 'center',
+    fontFamily: 'Inter_600SemiBold',
+  },
+  searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    paddingLeft: 16,
+    paddingRight: 2,
+    paddingVertical: 12,
+    marginTop: 8,
+    minHeight: 48,
+    borderWidth: 2,
+    borderColor: 'transparent',
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  searchContainerFocused: {
+    borderWidth: 2,
+    borderColor: '#135bec',
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  searchIcon: {
+    marginRight: 8,
+  },
+  searchInput: {
+    flex: 1,
+    fontSize: 14,
+    fontFamily: 'Inter_400Regular',
+    color: '#111318',
+    padding: 0,
+    lineHeight: 20,
+  },
+  card: {
+    marginTop: 20,
+    borderRadius: 12,
+    backgroundColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.05,
+    shadowRadius: 12,
+    elevation: 3,
+    overflow: 'hidden',
+  },
+  cardImage: {
+    width: '100%',
+    height: '100%',
+  },
+  cardContent: {
+    padding: 24,
+    gap: 4,
+  },
+  cardNumber: {
+    fontSize: 36,
+    fontFamily: 'Inter_700Bold',
+    color: '#135bec',
+    letterSpacing: -0.54,
+    lineHeight: 40,
+  },
+  cardDescription: {
+    fontSize: 16,
+    fontFamily: 'Inter_400Regular',
+    color: '#616f89',
+    lineHeight: 24,
+  },
+  cardImageContainer: {
+    width: '100%',
+    aspectRatio: 2 / 1,
+    backgroundColor: '#E0F2FE',
+    borderTopLeftRadius: 12,
+    borderTopRightRadius: 12,
+    overflow: 'hidden',
+  },
+  buttonContainer: {
+    paddingVertical: 20,
+  },
+  button: {
+    backgroundColor: '#135bec',
+    borderRadius: 12,
+    height: 56,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    shadowColor: '#135bec',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 6,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontFamily: 'Inter_700Bold',
+    letterSpacing: 0.24,
   },
 });
