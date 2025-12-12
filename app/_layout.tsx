@@ -24,7 +24,7 @@ export default function RootLayout() {
     const prepare = async () => {
       try {
         await SystemUI.setBackgroundColorAsync('#ffffff');
-        await new Promise((resolve) => setTimeout(resolve, 20000));
+        await new Promise((resolve) => setTimeout(resolve, 2000));
       } catch (e) {
         console.warn(e);
       } finally {

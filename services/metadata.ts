@@ -1,7 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CalculationsJson } from '../types/calculations';
 
-const API_BASE = process.env.EXPO_PUBLIC_API_URL || 'http://192.168.1.100:5000';
+import Constants from 'expo-constants';
+
+const API_BASE =
+  Constants.expoConfig?.extra?.apiUrl || process.env.EXPO_PUBLIC_API_URL;
 
 const KEY_VERSION = 'calc_metadata_version';
 const KEY_METADATA = 'calc_metadata_json';

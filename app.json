@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "CLINICALC",
+    "name": "Clinicalc",
     "slug": "CLINICALC",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -12,14 +12,9 @@
       "supportsTablet": true
     },
     "android": {
-      "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/logo.png",
-        "backgroundImage": "./assets/images/logo.png",
-        "monochromeImage": "./assets/images/logo.png"
-      },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.ennyyy.CLINICALC"
     },
     "web": {
       "output": "static",
@@ -46,7 +41,8 @@
       "router": {},
       "eas": {
         "projectId": "d9a66893-751b-4cc8-827c-5b35cb1c5d05"
-      }
+      },
+      "apiUrl": "https://clinicalc.onrender.com/"
     }
   }
 }

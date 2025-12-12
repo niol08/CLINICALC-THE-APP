@@ -497,7 +497,7 @@ const styles = StyleSheet.create({
     color: '#111318',
   },
   pickerContainer: {
-    backgroundColor: '#f6f6f8',
+    backgroundColor: '#e5e7eb',
     borderRadius: 12,
     justifyContent: 'center',
     minWidth: 160,
@@ -505,6 +505,7 @@ const styles = StyleSheet.create({
   },
   picker: {
     width: '100%',
+    color: '#111318',
   },
   swapContainer: {
     alignItems: 'center',

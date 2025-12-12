@@ -14,10 +14,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Constants from 'expo-constants';
 
 import { Message, RecentCalculation, FavoriteCalculation } from '@/types';
 
-const API_BASE = process.env.EXPO_PUBLIC_API_URL?.replace(/\/$/, '');
+const API_BASE =
+  process.env.EXPO_PUBLIC_API_URL?.replace(/\/$/, '') ||
+  Constants.expoConfig?.extra?.apiUrl?.replace(/\/$/, '');
 
 export default function ChatScreen() {
   const router = useRouter();
