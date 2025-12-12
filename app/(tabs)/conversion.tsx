@@ -182,6 +182,7 @@ export default function ConversionScreen() {
                     selectedValue={selectedAnalyte}
                     onValueChange={handleAnalyteChange}
                     style={styles.picker}
+                    dropdownIconColor='#e5e7eb'
                   >
                     <Picker.Item label='Glucose' value='glucose' />
                     <Picker.Item label='Cholesterol' value='cholesterol' />
@@ -191,6 +192,12 @@ export default function ConversionScreen() {
                     <Picker.Item label='Uric Acid' value='uric_acid' />
                     <Picker.Item label='Calcium' value='calcium' />
                   </Picker>
+                  <Ionicons
+                    name='caret-down'
+                    size={16}
+                    color='#616f89'
+                    style={styles.pickerIcon}
+                  />
                 </View>
               </View>
             )}
@@ -204,6 +211,7 @@ export default function ConversionScreen() {
                       selectedValue={infusionAnalyte}
                       onValueChange={handleInfusionAnalyteChange}
                       style={styles.picker}
+                      dropdownIconColor='#e5e7eb'
                     >
                       <Picker.Item label='Select Analyte' value='' />
                       <Picker.Item label='Insulin' value='insulin' />
@@ -216,6 +224,12 @@ export default function ConversionScreen() {
                         value='erythropoietin'
                       />
                     </Picker>
+                    <Ionicons
+                      name='caret-down'
+                      size={16}
+                      color='#616f89'
+                      style={styles.pickerIcon}
+                    />
                   </View>
                 </View>
 
@@ -265,6 +279,7 @@ export default function ConversionScreen() {
                     selectedValue={fromUnit}
                     onValueChange={handleFromUnitChange}
                     style={styles.picker}
+                    dropdownIconColor='#e5e7eb'
                   >
                     {currentConversion.units.map((unit) => (
                       <Picker.Item
@@ -274,6 +289,12 @@ export default function ConversionScreen() {
                       />
                     ))}
                   </Picker>
+                  <Ionicons
+                    name='caret-down'
+                    size={16}
+                    color='#616f89'
+                    style={styles.pickerIcon}
+                  />
                 </View>
               </View>
             </View>
@@ -320,6 +341,7 @@ export default function ConversionScreen() {
                     selectedValue={toUnit}
                     onValueChange={handleToUnitChange}
                     style={styles.picker}
+                    dropdownIconColor='#e5e7eb'
                   >
                     {currentConversion.units.map((unit) => (
                       <Picker.Item
@@ -329,6 +351,12 @@ export default function ConversionScreen() {
                       />
                     ))}
                   </Picker>
+                  <Ionicons
+                    name='caret-down'
+                    size={16}
+                    color='#616f89'
+                    style={styles.pickerIcon}
+                  />
                 </View>
               </View>
             </View>
@@ -507,6 +535,11 @@ const styles = StyleSheet.create({
     width: '100%',
     color: '#111318',
   },
+  pickerIcon: {
+    position: 'absolute',
+    right: 12,
+    pointerEvents: 'none',
+  },
   swapContainer: {
     alignItems: 'center',
     paddingVertical: 16,
@@ -534,7 +567,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter_500Medium',
     color: '#92400e',
   },
-  // Update the alert styles (lines 545-581)
   alertOverlay: {
     flex: 1,
     justifyContent: 'center',
