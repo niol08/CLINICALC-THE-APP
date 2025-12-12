@@ -13,15 +13,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-interface RecentCalculation {
-  id: string;
-  name: string;
-  slug: string;
-  inputs: string;
-  result: string;
-  unit?: string;
-  timestamp: number;
-}
+import { RecentCalculation } from '@/types';
 
 export default function RecentsScreen() {
   const router = useRouter();

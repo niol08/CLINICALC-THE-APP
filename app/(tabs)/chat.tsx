@@ -15,31 +15,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-interface Message {
-  id: string;
-  type: 'user' | 'assistant';
-  content: string;
-  timestamp: Date;
-  calculatorSlug?: string;
-  calculatorName?: string;
-}
-
-interface RecentCalculation {
-  id: string;
-  calculationName: string;
-  calculationSlug: string;
-  inputs: { label: string; value: string; unit?: string }[];
-  result: number;
-  unit: string;
-  timestamp: number;
-}
-
-interface FavoriteCalculation {
-  id: string;
-  calculationName: string;
-  calculationSlug: string;
-  savedAt: number;
-}
+import { Message, RecentCalculation, FavoriteCalculation } from '@/types';
 
 const API_BASE = process.env.EXPO_PUBLIC_API_URL?.replace(/\/$/, '');
 
@@ -92,7 +68,6 @@ export default function ChatScreen() {
       const response = await fetch(`${API_BASE}/api/metadata`);
       if (response.ok) {
         const data = await response.json();
-        // Flatten all calculators from all categories
         const allCalcs = data.data.categories.flatMap((cat: any) =>
           cat.calculations.map((calc: any) => ({
             name: calc.name,
@@ -101,7 +76,6 @@ export default function ChatScreen() {
           }))
         );
         console.log('Sample calculators:', allCalcs.slice(0, 10));
-        // Specifically check for BMI
         console.log(
           'BMI calculators:',
           allCalcs.filter(
@@ -198,20 +172,17 @@ export default function ChatScreen() {
       recents.length > 0
         ? `\n\nUser's Recent Calculations:\n${recents
             .slice(0, 5)
-            .map(
-              (r) => `- ${r.calculationName}: Result = ${r.result} ${r.unit}`
-            )
+            .map((r) => `- ${r.name}: Result = ${r.result} ${r.unit}`)
             .join('\n')}`
         : '';
 
     const favoritesContext =
       favorites.length > 0
         ? `\n\nUser's Favorite Calculators:\n${favorites
-            .map((f) => `- ${f.calculationName}`)
+            .map((f) => `- ${f.name}`)
             .join('\n')}`
         : '';
 
-    // Build available calculators list
     const calculatorsContext =
       calculators.length > 0
         ? `\n\nAvailable Calculators:\n${calculators
@@ -271,14 +242,11 @@ When responding:
 
     console.log('Raw AI response:', aiText);
 
-    // Remove asterisks (markdown bold)
     aiText = aiText.replace(/\*\*/g, '').replace(/\*/g, '');
 
-    // Parse calculator mentions
     const calculatorMatch = aiText.match(/\[CALCULATOR:([^:]+):([^\]]+)\]/);
     console.log('Calculator match:', calculatorMatch);
 
-    // Parse suggestions
     const suggestionsMatch = aiText.match(/\[SUGGESTIONS:([^\]]+)\]/);
     console.log('Suggestions match:', suggestionsMatch);
 
@@ -292,7 +260,6 @@ When responding:
       console.warn('No suggestions found in AI response');
     }
 
-    // Remove formatting tags from display text
     aiText = aiText
       .replace(/\[CALCULATOR:[^:]+:[^\]]+\]/g, '')
       .replace(/\[SUGGESTIONS:[^\]]+\]/g, '')
@@ -340,7 +307,6 @@ When responding:
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={0}
       >
-        {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity
             style={styles.headerButton}
@@ -362,19 +328,21 @@ When responding:
           </View>
 
           <View style={styles.headerActions}>
-            {messages.length > 0 && (
-              <TouchableOpacity
-                style={styles.headerButton}
-                onPress={clearChatHistory}
-                activeOpacity={0.7}
-              >
-                <Ionicons name='trash-outline' size={22} color='#616f89' />
-              </TouchableOpacity>
-            )}
+            <TouchableOpacity
+              style={styles.headerButton}
+              onPress={clearChatHistory}
+              activeOpacity={0.7}
+              disabled={messages.length === 0}
+            >
+              <Ionicons
+                name='trash-outline'
+                size={22}
+                color={messages.length === 0 ? '#D1D5DB' : '#616f89'}
+              />
+            </TouchableOpacity>
           </View>
         </View>
 
-        {/* Messages */}
         <ScrollView
           ref={scrollViewRef}
           style={styles.messagesContainer}
@@ -420,7 +388,6 @@ When responding:
                     {message.content}
                   </Text>
 
-                  {/* Calculator button if applicable */}
                   {message.calculatorSlug && (
                     <TouchableOpacity
                       style={styles.calculatorButton}
@@ -467,9 +434,7 @@ When responding:
           )}
         </ScrollView>
 
-        {/* Input Area */}
         <View style={styles.inputContainer}>
-          {/* Suggested Questions */}
           <ScrollView
             horizontal
             style={styles.suggestionsContainer}
@@ -488,7 +453,6 @@ When responding:
             ))}
           </ScrollView>
 
-          {/* Input Field */}
           <View style={styles.inputWrapper}>
             <View style={styles.inputField}>
               <TextInput
@@ -504,7 +468,10 @@ When responding:
             </View>
 
             <TouchableOpacity
-              style={styles.sendButton}
+              style={[
+                styles.sendButton,
+                !inputText.trim() && styles.sendButtonDisabled,
+              ]}
               onPress={handleSendMessage}
               activeOpacity={0.7}
               disabled={!inputText.trim()}
@@ -758,5 +725,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
+  },
+  sendButtonDisabled: {
+    backgroundColor: '#D1D5DB',
+    shadowColor: '#D1D5DB',
   },
 });

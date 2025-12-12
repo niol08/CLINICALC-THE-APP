@@ -1,4 +1,3 @@
-// app/(tabs)/conversion.tsx
 import React from 'react';
 import {
   View,
@@ -28,7 +27,6 @@ export default function ConversionScreen() {
   const [toUnit, setToUnit] = React.useState('cm');
   const [showCopiedAlert, setShowCopiedAlert] = React.useState(false);
 
-  // Extra inputs for infusion and concentration
   const [selectedAnalyte, setSelectedAnalyte] = React.useState('glucose');
   const [infusionAnalyte, setInfusionAnalyte] = React.useState('');
   const [concentration, setConcentration] = React.useState('');
@@ -131,15 +129,12 @@ export default function ConversionScreen() {
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      {/* Header */}
       <View style={styles.header}>
         <View style={styles.headerSpacer} />
         <Text style={styles.headerTitle}>Unit Conversions</Text>
         <View style={styles.headerSpacer} />
       </View>
       <ScrollView>
-        {/* Category Chips */}
-
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -169,7 +164,6 @@ export default function ConversionScreen() {
           )}
         </ScrollView>
 
-        {/* Conversion Card */}
         <KeyboardAwareScrollView
           showsVerticalScrollIndicator={false}
           enableOnAndroid={true}
@@ -180,7 +174,6 @@ export default function ConversionScreen() {
           contentContainerStyle={{ flexGrow: 1 }}
         >
           <View style={styles.conversionCard}>
-            {/* Concentration Analyte Picker */}
             {selectedCategory === 'concentration' && (
               <View style={styles.extraInputGroup}>
                 <Text style={styles.label}>Analyte</Text>
@@ -202,7 +195,6 @@ export default function ConversionScreen() {
               </View>
             )}
 
-            {/* Infusion Extra Inputs */}
             {selectedCategory === 'infusion' && (
               <>
                 <View style={styles.extraInputGroup}>
@@ -256,8 +248,6 @@ export default function ConversionScreen() {
               </>
             )}
 
-            {/* From Input */}
-            {/* From Input */}
             <View style={styles.inputGroup}>
               <Text style={styles.label}>From</Text>
               <View style={styles.inputRow}>
@@ -288,7 +278,6 @@ export default function ConversionScreen() {
               </View>
             </View>
 
-            {/* Swap Button */}
             <View style={styles.swapContainer}>
               <TouchableOpacity
                 style={styles.swapButton}
@@ -299,7 +288,6 @@ export default function ConversionScreen() {
               </TouchableOpacity>
             </View>
 
-            {/* To Input with Copy Button */}
             <View style={styles.inputGroup}>
               <View style={styles.labelRow}>
                 <Text style={styles.label}>To</Text>
@@ -348,7 +336,6 @@ export default function ConversionScreen() {
         </KeyboardAwareScrollView>
       </ScrollView>
 
-      {/* Custom Styled Alert */}
       <Modal
         visible={showCopiedAlert}
         transparent={true}

@@ -15,13 +15,7 @@ import * as Clipboard from 'expo-clipboard';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { getExplanation } from '@/services/calculation';
-
-interface FavoriteCalculation {
-  id: string;
-  name: string;
-  slug: string;
-  timestamp: number;
-}
+import { FavoriteCalculation } from '@/types';
 
 export default function ResultScreen() {
   const router = useRouter();

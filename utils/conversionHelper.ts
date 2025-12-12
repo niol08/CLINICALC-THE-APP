@@ -18,7 +18,6 @@ export const convertValue = (
 
   const conversion = CONVERSIONS[selectedCategory];
 
-  // Check if it's a function-based conversion
   if ('convert' in conversion && typeof conversion.convert === 'function') {
     if (selectedCategory === 'concentration') {
       return conversion
@@ -31,7 +30,6 @@ export const convertValue = (
       const concentrationVal = parseFloat(options?.concentration || '') || null;
       const analyteVal = options?.infusionAnalyte || null;
 
-      // Check for IU warning
       if (
         (from === 'IU' || to === 'IU') &&
         !(['mg', 'µg'].includes(from) || ['mg', 'µg'].includes(to))
@@ -54,11 +52,9 @@ export const convertValue = (
       .replace(/\.?0+$/, '');
   }
 
-  // Factor-based conversion
   if (from === to) return value;
 
   const key = `${from}:${to}`;
-  // Type guard: check if conversion has 'factors' property
   if ('factors' in conversion) {
     const factor = conversion.factors[key];
     if (typeof factor === 'number') {

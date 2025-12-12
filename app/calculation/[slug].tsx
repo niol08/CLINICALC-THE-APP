@@ -17,13 +17,7 @@ import { Parameter } from '../../types/calculations';
 import { computeCalculation } from '../../services/calculation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-interface FormValues {
-  [key: string]: string | number;
-}
-
-interface FormErrors {
-  [key: string]: string;
-}
+import { FormValues, FormErrors } from '@/types';
 
 const saveToRecents = async (calculationData: {
   name: string;

@@ -33,7 +33,6 @@ export default function AboutScreen() {
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.backButton}
@@ -161,7 +160,6 @@ export default function AboutScreen() {
           </View>
         </View>
 
-        {/* List Items Section */}
         <View style={styles.listSection}>
           <TouchableOpacity
             style={[styles.listItem, styles.listItemBorder]}

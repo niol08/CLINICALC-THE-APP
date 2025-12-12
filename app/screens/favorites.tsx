@@ -13,12 +13,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-interface FavoriteCalculation {
-  id: string;
-  name: string;
-  slug: string;
-  timestamp: number;
-}
+import { FavoriteCalculation } from '@/types';
 
 export default function FavoritesScreen() {
   const router = useRouter();
