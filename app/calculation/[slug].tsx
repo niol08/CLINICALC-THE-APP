@@ -15,6 +15,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useMetadata } from '../../hooks/useMetadata';
 import { Parameter } from '../../types/calculations';
 import { computeCalculation } from '../../services/calculation';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { FormValues, FormErrors } from '@/types';
@@ -350,16 +351,21 @@ export default function CalculationInputScreen() {
         <View style={styles.headerSpacer} />
       </View>
 
-      <ScrollView
+      <KeyboardAwareScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+        enableOnAndroid={true}
+        enableAutomaticScroll={true}
+        extraScrollHeight={20}
+        keyboardShouldPersistTaps='handled'
       >
         <Text style={styles.mainTitle}>{calculation.name}</Text>
 
         <View style={styles.formSection}>
           {calculation.parameters.map((param) => renderParameter(param))}
         </View>
-      </ScrollView>
+      </KeyboardAwareScrollView>
 
       <View style={styles.bottomContainer}>
         <TouchableOpacity

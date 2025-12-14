@@ -14,6 +14,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { useMetadata } from '../../hooks/useMetadata';
 import { Calculation } from '../../types/calculations';
 
+import { useRecentCategories } from '@/hooks/useRecentCategories';
+
 export default function CategoryDetailScreen() {
   const router = useRouter();
   const { slug } = useLocalSearchParams<{ slug: string }>();
@@ -22,6 +24,8 @@ export default function CategoryDetailScreen() {
   const [expandedItems, setExpandedItems] = React.useState<Set<string>>(
     new Set()
   );
+
+  const { addRecentCategory } = useRecentCategories();
 
   const category = React.useMemo(() => {
     return data?.categories.find((cat) => cat.slug === slug);
@@ -38,6 +42,12 @@ export default function CategoryDetailScreen() {
         calc.description?.toLowerCase().includes(query)
     );
   }, [category, searchQuery]);
+
+  React.useEffect(() => {
+    if (category) {
+      addRecentCategory(category.slug, category.title);
+    }
+  }, [category]);
 
   const toggleExpanded = (itemKey: string, event: any) => {
     event?.stopPropagation?.();

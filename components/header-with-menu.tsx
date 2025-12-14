@@ -38,9 +38,7 @@ export function HeaderWithMenu() {
 
   const handleNavigation = (route: string) => {
     closeMenu();
-    setTimeout(() => {
-      router.push(route as any);
-    }, 300);
+    router.push(route as any);
   };
 
   return (

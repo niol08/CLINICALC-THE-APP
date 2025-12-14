@@ -308,7 +308,7 @@ const styles = StyleSheet.create({
   },
   resultsHeader: {
     paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingBottom: 12,
     alignItems: 'center',
   },
   resultsCount: {
@@ -318,9 +318,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   listContent: {
-    padding: 16,
+    // padding: 16,
+    paddingHorizontal: 16,
     gap: 12,
     flexGrow: 1,
+    paddingBottom: 48,
   },
   calculationCard: {
     flexDirection: 'row',

@@ -1,3 +1,12 @@
+import { Ionicons } from '@expo/vector-icons';
+
+export interface RecentCategory {
+  slug: string;
+  title: string;
+  timestamp: number;
+  icon?: keyof typeof Ionicons.glyphMap;
+}
+
 export interface Message {
   id: string;
   type: 'user' | 'assistant';
