@@ -9,6 +9,7 @@ import {
   Inter_600SemiBold,
   Inter_700Bold,
 } from '@expo-google-fonts/inter';
+import { StatusBar } from 'expo-status-bar';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -23,7 +24,7 @@ export default function RootLayout() {
   useEffect(() => {
     const prepare = async () => {
       try {
-        await SystemUI.setBackgroundColorAsync('#ffffff');
+        await SystemUI.setBackgroundColorAsync('#f6f6f8');
         await new Promise((resolve) => setTimeout(resolve, 2000));
       } catch (e) {
         console.warn(e);
@@ -40,8 +41,11 @@ export default function RootLayout() {
   }
 
   return (
-    <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name='(tabs)' />
-    </Stack>
+    <>
+      <StatusBar style='dark' backgroundColor='#f6f6f8' />
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name='(tabs)' />
+      </Stack>
+    </>
   );
 }

@@ -9,12 +9,22 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "statusBarStyle": "dark",
+      "backgroundColor": "#f6f6f8"
     },
     "android": {
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.ennyyy.CLINICALC"
+      "package": "com.ennyyy.CLINICALC",
+      "statusBar": {
+        "barStyle": "dark-content",
+        "backgroundColor": "#f6f6f8"
+      },
+      "navigationBar": {
+        "backgroundColor": "#f6f6f8",
+        "barStyle": "dark-content"
+      }
     },
     "web": {
       "output": "static",
