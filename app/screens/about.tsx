@@ -57,7 +57,7 @@ export default function AboutScreen() {
             />
           </View>
           <Text style={styles.appName}>CLINICALC</Text>
-          <Text style={styles.appVersion}>Version 1.0.0</Text>
+          <Text style={styles.appVersion}>Version 1.0.1</Text>
           <Text style={styles.appDescription}>
             Providing accurate and accessible medical calculations and unit
             conversions for healthcare professionals.
