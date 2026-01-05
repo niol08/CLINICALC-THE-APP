@@ -14,9 +14,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { HeaderWithMenu } from '@/components/header-with-menu';
 import { Ionicons } from '@expo/vector-icons';
 
-import { CATEGORY_ICONS, DEFAULT_ICON } from '@/constants/categoryIcons';
-import { useRecentCategories } from '@/hooks/useRecentCategories';
-import { useMetadata } from '@/hooks/useMetadata';
+// import { CATEGORY_ICONS, DEFAULT_ICON } from '@/constants/categoryIcons';
+// import { useRecentCategories } from '@/hooks/useRecentCategories';
+// import { useMetadata } from '@/hooks/useMetadata';
 
 function FeatureItem({
   icon,
@@ -45,8 +45,8 @@ export default function HomeScreen() {
   const [isFocused, setIsFocused] = useState(false);
   const router = useRouter();
 
-  const { recentCategories } = useRecentCategories();
-  const { data } = useMetadata();
+  // const { recentCategories } = useRecentCategories();
+  // const { data } = useMetadata();
 
   const handleSearch = () => {
     if (searchQuery.trim()) {
@@ -56,22 +56,22 @@ export default function HomeScreen() {
     }
   };
 
-  const displayCategories = React.useMemo(() => {
-    if (recentCategories.length > 0) {
-      return recentCategories.map((cat) => ({
-        ...cat,
-        icon: CATEGORY_ICONS[cat.slug] || DEFAULT_ICON,
-      }));
-    }
-    return (
-      data?.categories?.slice(0, 3).map((cat) => ({
-        slug: cat.slug,
-        title: cat.title,
-        timestamp: Date.now(),
-        icon: CATEGORY_ICONS[cat.slug] || DEFAULT_ICON,
-      })) || []
-    );
-  }, [recentCategories, data]);
+  // const displayCategories = React.useMemo(() => {
+  //   if (recentCategories.length > 0) {
+  //     return recentCategories.map((cat) => ({
+  //       ...cat,
+  //       icon: CATEGORY_ICONS[cat.slug] || DEFAULT_ICON,
+  //     }));
+  //   }
+  //   return (
+  //     data?.categories?.slice(0, 3).map((cat) => ({
+  //       slug: cat.slug,
+  //       title: cat.title,
+  //       timestamp: Date.now(),
+  //       icon: CATEGORY_ICONS[cat.slug] || DEFAULT_ICON,
+  //     })) || []
+  //   );
+  // }, [recentCategories, data]);
 
   return (
     <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
