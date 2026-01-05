@@ -204,6 +204,19 @@ export default function AboutScreen() {
             </View>
             <Ionicons name='chevron-forward' size={20} color='#616f89' />
           </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.listItem}
+            onPress={() => handleLink('https://clinicalc.onrender.com/')}
+            activeOpacity={0.7}
+          >
+            <View style={styles.listItemLeft}>
+              <View style={styles.listItemIcon}>
+                <Ionicons name='globe-outline' size={24} color='#135bec' />
+              </View>
+              <Text style={styles.listItemText}>Visit Website</Text>
+            </View>
+            <Ionicons name='chevron-forward' size={20} color='#616f89' />
+          </TouchableOpacity>
         </View>
 
         <View style={styles.socialSection}>

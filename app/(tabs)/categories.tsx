@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
+import { Feather, Ionicons } from '@expo/vector-icons';
 import { useMetadata } from '../../hooks/useMetadata';
 import { Category } from '../../types/calculations';
 
@@ -214,6 +214,9 @@ const styles = StyleSheet.create({
     letterSpacing: -0.015,
     lineHeight: 24,
   },
+  searchIcon: {
+    marginRight: 8,
+  },
   searchContainer: {
     paddingHorizontal: 16,
     paddingVertical: 12,
@@ -223,12 +226,14 @@ const styles = StyleSheet.create({
     height: 48,
     borderRadius: 12,
     overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
   },
   searchIconContainer: {
     backgroundColor: '#ffffff',
     borderTopLeftRadius: 12,
     borderBottomLeftRadius: 12,
-    borderWidth: 1,
+    // borderWidth: 1,
     borderRightWidth: 0,
     borderColor: '#E5E7EB',
     paddingLeft: 16,
@@ -240,7 +245,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     borderTopRightRadius: 12,
     borderBottomRightRadius: 12,
-    borderWidth: 1,
+    // borderWidth: 1,
+    borderLeftWidth: 0,
     borderColor: '#E5E7EB',
     paddingHorizontal: 16,
     paddingLeft: 8,

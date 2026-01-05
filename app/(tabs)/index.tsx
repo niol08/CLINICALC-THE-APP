@@ -93,7 +93,7 @@ export default function HomeScreen() {
           />
           <TextInput
             style={styles.searchInput}
-            placeholder="Search calculations, e.g., 'BMI', 'GFR'..."
+            placeholder='Search calculations, e.g. BMI, GFR...'
             placeholderTextColor='#616f89'
             value={searchQuery}
             onChangeText={setSearchQuery}
@@ -144,7 +144,7 @@ export default function HomeScreen() {
             description='Quick access to your tools'
           />
         </View>
-        {data && displayCategories.length > 0 && (
+        {/* {data && displayCategories.length > 0 && (
           <View style={styles.recentCategoriesSection}>
             <Text style={styles.sectionTitle}>Quick Categories</Text>
             <View style={styles.categoryGrid}>
@@ -170,7 +170,7 @@ export default function HomeScreen() {
             </View>
           </View>
         )}
-        <View style={{ flex: 1 }} />
+        <View style={{ flex: 1 }} /> */}
 
         <View style={styles.buttonContainer}>
           <TouchableOpacity
@@ -298,24 +298,42 @@ const styles = StyleSheet.create({
     marginTop: 24,
     gap: 12,
   },
+  // featureItem: {
+  //   flexDirection: 'row',
+  //   alignItems: 'center',
+  //   backgroundColor: '#fff',
+  //   borderRadius: 12,
+  //   padding: 16,
+  //   gap: 16,
+  //   shadowColor: '#000',
+  //   shadowOffset: { width: 0, height: 1 },
+  //   shadowOpacity: 0.05,
+  //   shadowRadius: 4,
+  //   elevation: 2,
+  // },
+  // featureIconContainer: {
+  //   width: 48,
+  //   height: 48,
+  //   borderRadius: 24,
+  //   backgroundColor: 'rgba(19, 91, 236, 0.1)',
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  // },
   featureItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    padding: 16,
+    backgroundColor: 'transparent',
+    borderLeftWidth: 2.5,
+    borderLeftColor: '#135bec',
+    paddingLeft: 16,
+    paddingVertical: 12,
     gap: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
-    elevation: 2,
   },
   featureIconContainer: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: 'rgba(19, 91, 236, 0.1)',
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: 'rgba(19, 91, 236, 0.08)',
     justifyContent: 'center',
     alignItems: 'center',
   },
