@@ -1,0 +1,58 @@
+{
+  "expo": {
+    "name": "Clinicalc",
+    "slug": "CLINICALC",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "clinicalc",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "statusBarStyle": "dark",
+      "backgroundColor": "#f6f6f8"
+    },
+    "android": {
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false,
+      "package": "com.ennyyy.CLINICALC",
+      "statusBar": {
+        "barStyle": "dark-content",
+        "backgroundColor": "#f6f6f8"
+      },
+      "navigationBar": {
+        "backgroundColor": "#f6f6f8",
+        "barStyle": "dark-content"
+      }
+    },
+    "web": {
+      "output": "static",
+      "favicon": "./assets/images/icon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/logo.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
+        }
+      ],
+      "expo-font"
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "d9a66893-751b-4cc8-827c-5b35cb1c5d05"
+      },
+      "apiUrl": "https://clinicalc.onrender.com/"
+    }
+  }
+}
